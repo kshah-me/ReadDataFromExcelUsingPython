@@ -1,0 +1,14 @@
+from xlrd import *
+from xlwt import *
+
+
+def getdatafromcell(filelocation, sheetname, row, col):
+    wb = open_workbook(filelocation)
+    sheetdata = wb.sheet_by_name(sheetname)
+    ColVal = sheetdata.cell_value(int(row), int(col))
+    wb.release_resources()
+    return ColVal
+
+
+print(getdatafromcell('C:/Users/Jesna/Desktop/RestApiAssignment/data.xls', 'data', 1, 1))
+print(getdatafromcell('C:/Users/Jesna/Desktop/RestApiAssignment/data.xlsx', 'data', 1, 1))
