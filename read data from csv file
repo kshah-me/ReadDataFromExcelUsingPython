@@ -1,0 +1,13 @@
+import csv
+path= "C:/Users/Jesna/Desktop/RestApiAssignment/data.csv"
+
+def read_csv_file(filelocation):
+    data = []
+    with open(filelocation, 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            data.append(row)
+    return data
+
+print(read_csv_file(path)[1][6])
+
