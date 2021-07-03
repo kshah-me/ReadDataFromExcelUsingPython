@@ -12,3 +12,10 @@ def getdatafromcell(filelocation, sheetname, row, col):
 
 print(getdatafromcell('C:/Users/Jesna/Desktop/RestApiAssignment/data.xls', 'data', 1, 1))
 print(getdatafromcell('C:/Users/Jesna/Desktop/RestApiAssignment/data.xlsx', 'data', 1, 1))
+
+
+How to call above method in Robot file:-
+
+Read Data From Excel
+    [Arguments]  ${sheetname}   ${row}
+    {TestCasename}   getdatafromcell        ../data/filename.xls    ${sheetname}    ${rownumber}    $[columnumber]
