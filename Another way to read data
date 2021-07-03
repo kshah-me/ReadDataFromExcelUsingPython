@@ -1,0 +1,29 @@
+robotframework-excel 1.0.0b4
+robotframework-excellib 2.0.1
+robotframework version should be 
+
+Library ExcelRobot
+
+Read_Scenarios_And_Data
+  [Arguments]   ${sSheetName}   ${sTestCaseNo}  ${sColumnName}
+  log ${DB_Archive_Env_Name}
+  ${ENV}= Run Keyword If  'IST' in '${DB_Archive_Env_Name}'  Set Variable   IST
+  ... ELSE  Set Variable  SDF
+  Set Global Variable   ${ENV}
+  Open Excel ../TestData/${ENV}.xlsx
+  log ${sColumnName}
+  ${colCount}   Get Column Count  ${sSheetName}
+  FOR   ${y}  IN RANGE  0   ${colCount}
+    ${header}    Read Cell Data    ${sSheetName}    ${y}    0
+    Run Keyword If    "${header}"=="${sColumnName}"    Set Test Variable    ${colNum}    ${y}
+  END
+  log ${colNum}
+  ${iTotalRows}   Get Row Count   ${sSheetName}
+  FOR   ${iRowNo}   IN RANGE  1   ${iTotalRows}
+    ${TC_Num}    Read Cell Data    ${sSheetName}    0    ${iRowNo}
+        #Incase TestCase No is same , fetch the data from same row and given column No
+        ${sSearchedData}    Run Keyword If    "${sTestCaseNo}"=="${TC_Num}"    Read Cell Data    ${sSheetName}    ${colNum}    ${iRowNo}
+        Run Keyword If    "${sTestCaseNo}"=="${TC_Num}"    Exit For Loop
+
+  END
+  [Return]  ${sSearchedData}
