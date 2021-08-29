@@ -1,14 +1,17 @@
+Library needed to Import:-
+
 robotframework-excel 1.0.0b4
 robotframework-excellib 2.0.1
 robotframework version should be 
 
-Library ExcelRobot
+Library need to be called:-
+Library   ExcelRobot
 
 Read_Scenarios_And_Data
   [Arguments]   ${sSheetName}   ${sTestCaseNo}  ${sColumnName}
   log ${DB_Archive_Env_Name}
-  ${ENV}= Run Keyword If  'IST' in '${DB_Archive_Env_Name}'  Set Variable   IST
-  ... ELSE  Set Variable  SDF
+  ${ENV}= Run Keyword If  'ABC' in '${DB_Archive_Env_Name}'  Set Variable   ABC
+  ... ELSE  Set Variable  DEF
   Set Global Variable   ${ENV}
   Open Excel ../TestData/${ENV}.xlsx
   log ${sColumnName}
@@ -27,3 +30,11 @@ Read_Scenarios_And_Data
 
   END
   [Return]  ${sSearchedData}
+
+
+How to call Read_Scenarios_And_Data method:-
+${verifydata}  Read_Scenarios_And_Data  TestData    ${TEST_NAME}    MobileModel
+Where TestData is sheet name
+${TEST_NAME} is test case name in excel
+MobileModel is column name
+
